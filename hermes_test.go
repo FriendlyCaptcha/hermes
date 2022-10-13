@@ -1,8 +1,9 @@
 package hermes
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 var testedThemes = []Theme{
@@ -118,6 +119,8 @@ func (ed *SimpleExample) assertHTMLContent(t *testing.T, r string) {
 	assert.Contains(t, r, "#22BC66", "Action: Button should have given color")
 	assert.Contains(t, r, "https://hermes-example.com/confirm?token=d9729feb74992cc3482b350163a1a010", "Action: Button should have link")
 	assert.Contains(t, r, "Need help, or have questions", "Outro: Should have outro")
+	assert.NotContains(t, r, "&gt")
+	assert.NotContains(t, r, "&lt")
 }
 
 func (ed *SimpleExample) assertPlainTextContent(t *testing.T, r string) {
@@ -266,11 +269,11 @@ func (ed *WithInviteCode) getExample() (Hermes, Email) {
 
 	email := Email{
 		Body{
-			Name:      "Jon Snow",
+			Name: "Jon Snow",
 			Actions: []Action{
 				{
 					Instructions: "Here is your invite code:",
-					InviteCode: "123456",
+					InviteCode:   "123456",
 				},
 			},
 		},
